@@ -1,0 +1,15 @@
+# Secrets
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Editor and OS clutter
+.vscode/
+.DS_Store
+Thumbs.db
+
+*.db
+scratch_*.txt

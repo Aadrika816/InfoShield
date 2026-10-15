@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfoShield - AI-Powered Detection of Fake Government Schemes & Misinformation</title>
+  <meta name="description" content="InfoShield is a citizen-first AI verification platform to detect fake government schemes, fraudulent WhatsApp forwards, and phishing links against verified Government of India databases.">
+  <meta name="keywords" content="InfoShield, Fake Government Schemes, WhatsApp scam detector, PIB Fact Check, myScheme, cybercrime 1930, fake scholarship, Digital India">
+  <meta name="author" content="InfoShield National Security Team">
+  <meta property="og:title" content="InfoShield - AI Scheme Verification Platform">
+  <meta property="og:description" content="Verify before you trust: Detect fake government schemes and online fraud with AI evidence verification.">
+  <meta property="og:image" content="assets/logo.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Stylesheet -->
+  <script>
+    /* Apply saved theme before first paint (no flash) */
+    (function () {
+      var t = "dark";
+      try { t = localStorage.getItem("infoshield-theme") || "dark"; } catch (e) {}
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/theme-light.css">
+  <link rel="stylesheet" href="css/insights.css">
+
+  <!-- Tesseract.js (On-Device Client Optical Character Recognition Engine) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+
+  <!-- Indian National Tiranga Top Ribbon -->
+  <div class="tiranga-top-ribbon" role="presentation" aria-hidden="true"></div>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="brand-wrapper">
+        <img src="assets/logo.jpg" alt="InfoShield Shield Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title" data-i18n="appTitle">InfoShield</span>
+          <span class="brand-civic-tagline" data-i18n="brandCivicTagline">National Scheme Misinformation Defense • India 🇮🇳</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a href="#verifierSection" class="nav-link active" data-section="verifierSection" data-i18n="navVerify">AI Verifier</a>
+        <a href="#schemesSection" class="nav-link" data-section="schemesSection" data-i18n="navSchemes">Official Directory</a>
+        <a href="#pibSection" class="nav-link" data-section="pibSection" data-i18n="navPIB">Scam Alerts</a>
+      </nav>
+
+      <!-- Right Action: Citizen Portal & Multilingual Switcher -->
+      <div class="nav-right-actions">
+        <div class="theme-switch" id="themeSwitch" role="group" aria-label="Colour theme" data-i18n-title="themeToggleTitle" title="Switch colour theme">
+          <button type="button" class="theme-opt" id="themeBtnLight" data-theme-choice="light"><span class="theme-ico" aria-hidden="true">☀️</span><span data-i18n="themeLight">Light</span></button>
+          <button type="button" class="theme-opt" id="themeBtnDark" data-theme-choice="dark"><span class="theme-ico" aria-hidden="true">🌙</span><span data-i18n="themeDark">Dark</span></button>
+        </div>
+        <button type="button" class="citizen-auth-trigger" id="btnCitizenAuth" title="Citizen Account & Incident Filing">
+          <span class="auth-trigger-avatar" id="navAuthAvatar">👤</span>
+          <span class="auth-trigger-text">
+            <span class="auth-trigger-title" id="navAuthLabel">Sign In</span>
+            <span class="auth-trigger-sub" id="navAuthSub">Citizen Portal</span>
+          </span>
+          <span class="auth-trigger-caret">▾</span>
+        </button>
+        <div class="lang-selector-box" title="Select Indian Language / ਭਾਸ਼ਾ ਚੁਣੋ">
+          <span class="lang-icon">🇮🇳</span>
+          <select id="langSelect" class="lang-select-input" aria-label="Select Indian Language">
+            <option value="en">English (EN)</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="hi-latn">🇮🇳 Hinglish (Hindi in Roman)</option>
+            <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+            <option value="gu">ગુજરાતી (Gujarati)</option>
+            <option value="bn">বাংলা (Bengali)</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+            <option value="ml">മലയാളം (Malayalam)</option>
+            <option value="mr">मराठी (Marathi)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="heroSection">
+    <div class="container">
+      
+      <!-- Patriotic Motto Banner with Spinning Ashoka Chakra -->
+      <div class="patriotic-motto-row">
+        <div class="patriotic-pill">
+          <svg class="chakra-spin-icon" width="22" height="22" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <circle cx="50" cy="50" r="46" stroke="#000088" stroke-width="4.5" fill="#ffffff" />
+            <circle cx="50" cy="50" r="9" fill="#000088" />
+            <!-- 24 Sacred Spokes of Ashoka Chakra -->
+            <g stroke="#000088" stroke-width="2.6">
+              <line x1="50" y1="50" x2="50" y2="4" />
+              <line x1="50" y1="50" x2="50" y2="96" />
+              <line x1="50" y1="50" x2="4" y2="50" />
+              <line x1="50" y1="50" x2="96" y2="50" />
+              <line x1="50" y1="50" x2="17.5" y2="17.5" />
+              <line x1="50" y1="50" x2="82.5" y2="82.5" />
+              <line x1="50" y1="50" x2="17.5" y2="82.5" />
+              <line x1="50" y1="50" x2="82.5" y2="17.5" />
+              <line x1="50" y1="50" x2="27.3" y2="10.6" />
+              <line x1="50" y1="50" x2="72.7" y2="89.4" />
+              <line x1="50" y1="50" x2="10.6" y2="27.3" />
+              <line x1="50" y1="50" x2="89.4" y2="72.7" />
+              <line x1="50" y1="50" x2="10.6" y2="72.7" />
+              <line x1="50" y1="50" x2="89.4" y2="27.3" />
+              <line x1="50" y1="50" x2="27.3" y2="89.4" />
+              <line x1="50" y1="50" x2="72.7" y2="10.6" />
+              <line x1="50" y1="50" x2="38.1" y2="6.2" />
+              <line x1="50" y1="50" x2="61.9" y2="93.8" />
+              <line x1="50" y1="50" x2="6.2" y2="38.1" />
+              <line x1="50" y1="50" x2="93.8" y2="61.9" />
+              <line x1="50" y1="50" x2="6.2" y2="61.9" />
+              <line x1="50" y1="50" x2="93.8" y2="38.1" />
+              <line x1="50" y1="50" x2="38.1" y2="93.8" />
+              <line x1="50" y1="50" x2="61.9" y2="6.2" />
+            </g>
+          </svg>
+          <span data-i18n="patrioticMotto">Satyameva Jayate • Digital India, Secure India 🇮🇳</span>
+        </div>
+      </div>
+
+      <div class="hero-pill-badge">
+        <span class="hero-pill-dot"></span>
+        <span data-i18n="slogan">Verify. Trust. Share Responsibly.</span>
+      </div>
+
+      <h1 class="hero-headline">
+        <span data-i18n="heroHeading">Protect Yourself from Fake Government Schemes & Scams</span>
+      </h1>
+
+      <p class="hero-subheadline" data-i18n="heroSubheading">
+        Instant AI verification of suspicious WhatsApp forwards, SMS messages, scheme claims, and phishing links against verified Government of India databases.
+      </p>
+
+      <!-- 4-Step Methodology from Slide 3 & 7 -->
+      <div class="methodology-flow" aria-label="Verification Workflow">
+        <div class="flow-step-item">
+          <span class="flow-step-num">1</span>
+          <span data-i18n="flowStep1Text">Submit Message / Link</span>
+        </div>
+        <span class="flow-arrow">➔</span>
+        <div class="flow-step-item">
+          <span class="flow-step-num">2</span>
+          <span data-i18n="flowStep2Text">AI & Scam Scan</span>
+        </div>
+        <span class="flow-arrow">➔</span>
+        <div class="flow-step-item">
+          <span class="flow-step-num">3</span>
+          <span data-i18n="flowStep3Text">Official Portal Match</span>
+        </div>
+        <span class="flow-arrow">➔</span>
+        <div class="flow-step-item">
+          <span class="flow-step-num">4</span>
+          <span data-i18n="flowStep4Text">Trusted Guidance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main AI Verifier Workspace Section -->
+  <main class="container" id="verifierSection">
+    <section class="workspace-wrapper" aria-label="Verification Workspace">
+      
+      <!-- AI Engine Selector Bar -->
+      <div class="ai-engine-control-bar">
+        <div class="engine-control-left">
+          <span class="engine-control-title" data-i18n="engineControlTitle">🧠 Verification Engine:</span>
+          <div class="engine-button-group" role="group" aria-label="AI Engine Selection">
+            <button type="button" class="engine-select-btn" id="btnEngineLocal" title="Local Deterministic Heuristic & Knowledge Engine">
+              <span class="engine-icon">🛡️</span>
+              <span class="engine-name" data-i18n="engineLocalName">Local Civic Engine</span>
+              <span class="engine-pill local-pill" data-i18n="engineLocalPill">Offline • 0ms</span>
+            </button>
+            <button type="button" class="engine-select-btn active" id="btnEngineGroq" title="Groq LPU Cloud Inference (Qwen 3.8 LLM)">
+              <span class="engine-icon">⚡</span>
+              <span class="engine-name" data-i18n="engineGroqName">Groq Cloud AI</span>
+              <span class="engine-pill groq-pill" data-i18n="engineGroqPill">Qwen 3.8 • LPU</span>
+            </button>
+          </div>
+        </div>
+        <div class="engine-control-right">
+          <div class="engine-status-chip" id="engineStatusChip">
+            <span class="status-pulse-dot"></span>
+            <span class="status-label" id="engineStatusLabel" data-i18n="engineStatusGroq">Groq Cloud AI Active</span>
+          </div>
+          <button type="button" class="btn-api-settings" id="btnOpenGroqModal" title="Configure Groq API Key" data-i18n="btnKeyConfig">
+            ⚙️ Key
+          </button>
+        </div>
+      </div>
+
+      <!-- Input Tabs -->
+      <div class="workspace-tabs" role="tablist">
+        <button class="tab-btn active" data-tab="message" role="tab" id="tab-message-btn">
+          <span class="tab-icon">💬</span>
+          <span data-i18n="tabMessage">Message / Text</span>
+        </button>
+        <button class="tab-btn" data-tab="ocr" role="tab" id="tab-ocr-btn">
+          <span class="tab-icon">📸</span>
+          <span data-i18n="tabScreenshot">Screenshot OCR</span>
+        </button>
+        <button class="tab-btn" data-tab="url" role="tab" id="tab-url-btn">
+          <span class="tab-icon">🌐</span>
+          <span data-i18n="tabUrl">Official Domain Auditor</span>
+        </button>
+        <button class="tab-btn" data-tab="bot" role="tab" id="tab-bot-btn">
+          <span class="tab-icon">💬</span>
+          <span data-i18n="tabBot">WhatsApp Bot Simulator</span>
+        </button>
+      </div>
+
+      <div class="tab-content-area">
+        <!-- Tab 1: Message / Text Verification -->
+        <div class="tab-pane active" id="tabPane-message" role="tabpanel">
+          
+          <!-- Category Filter Bar -->
+          <div class="category-filter-bar">
+            <span class="category-filter-label" data-i18n="filterCategoryLabel">Filter Category:</span>
+            <div class="cat-filter-pills" id="catFilterPills">
+              <button type="button" class="cat-filter-btn active" data-category="all" data-i18n="catAll">All (22)</button>
+              <button type="button" class="cat-filter-btn" data-category="healthcare" data-i18n="catHealthcare">🏥 Healthcare</button>
+              <button type="button" class="cat-filter-btn" data-category="banking" data-i18n="catBanking">🏦 Banking & KYC</button>
+              <button type="button" class="cat-filter-btn" data-category="welfare" data-i18n="catWelfare">🌾 Farming & Welfare</button>
+              <button type="button" class="cat-filter-btn" data-category="jobs" data-i18n="catJobs">💼 Jobs & Careers</button>
+              <button type="button" class="cat-filter-btn" data-category="utility" data-i18n="catUtility">⚡ Power & Utilities</button>
+              <button type="button" class="cat-filter-btn" data-category="loans" data-i18n="catLoans">💰 MSME Loans</button>
+              <button type="button" class="cat-filter-btn" data-category="tech" data-i18n="catTech">📱 Student Tech</button>
+              <button type="button" class="cat-filter-btn" data-category="housing" data-i18n="catHousing">🏠 Housing & PMAY</button>
+              <button type="button" class="cat-filter-btn" data-category="women" data-i18n="catWomen">👧 Women & Child</button>
+            </div>
+          </div>
+
+          <!-- Sample Selection Row -->
+          <div class="sample-picker-row">
+            <div class="sample-dropdown-box" style="flex: 1;">
+              <select id="sampleSelectDropdown" class="sample-select-dropdown" aria-label="Select from real-world samples">
+                <option value="" data-i18n="sampleSelectPrompt">📂 Choose from 22 Real-World Preset Samples (Click to Load)...</option>
+                <optgroup label="🇮🇳 Hinglish Dialect & Benefit Mismatch (Evaluator Favorites)">
+                  <option value="hinglish_kisan_fake">🚨 [HINGLISH] PM Kisan ₹25,000 Bonus & ₹500 Fee</option>
+                  <option value="hinglish_mudra_fake">🚨 [HINGLISH] PM Mudra Loan ₹1,250 Stamp Fee Scam</option>
+                  <option value="hinglish_kisan_genuine">✅ [HINGLISH] Official PM Kisan 17vi Kist Advisory</option>
+                  <option value="kisan_mismatch_fake">🚨 [MISMATCH] PM Kisan ₹25,000 Claim (Real Cap: ₹6,000)</option>
+                </optgroup>
+                <optgroup label="🏥 Healthcare Schemes (Ayushman Bharat / NHA)">
+                  <option value="healthcare_fake">🚨 [FAKE RISK] Ayushman Golden Card ₹450 Fee Scam</option>
+                  <option value="healthcare_genuine">✅ [GENUINE TRUE] Official Ayushman Bharat ABHA Health Notice</option>
+                </optgroup>
+                <optgroup label="🏦 Banking & Financial Security">
+                  <option value="banking_fake">🚨 [FAKE RISK] SBI YONO Account Suspended APK Scam</option>
+                  <option value="banking_genuine">✅ [GENUINE TRUE] Official RBI Kehta Hai & Jan Dhan DBT Advisory</option>
+                </optgroup>
+                <optgroup label="🌾 Agriculture & Farmer Welfare">
+                  <option value="welfare_fake">🚨 [FAKE RISK] PM Free Laptop Scheme 2024 (₹299 Fee)</option>
+                  <option value="welfare_genuine">✅ [GENUINE TRUE] Official PM-KISAN 17th Installment DBT Notice</option>
+                </optgroup>
+                <optgroup label="💼 Jobs & Government Recruitment">
+                  <option value="jobs_fake">🚨 [FAKE RISK] Railway TTE Direct Recruitment (₹750 Fee Scam)</option>
+                  <option value="jobs_genuine">✅ [GENUINE TRUE] Official Staff Selection Commission (SSC) Notice</option>
+                </optgroup>
+                <optgroup label="⚡ Utilities & Civic Alerts">
+                  <option value="utility_fake">🚨 [FAKE RISK] Electricity Power Cut Disconnection Threat</option>
+                  <option value="utility_genuine">✅ [GENUINE TRUE] Official PM Surya Ghar Solar Rooftop Subsidy</option>
+                </optgroup>
+                <optgroup label="💰 Business Loans & MSME">
+                  <option value="loans_fake">🚨 [FAKE RISK] PM Mudra Loan ₹10 Lakh 0% Interest (₹1,250 Stamp Fee)</option>
+                  <option value="loans_genuine">✅ [GENUINE TRUE] Official PM SVANidhi & MUDRA Collateral-Free Notice</option>
+                </optgroup>
+                <optgroup label="📱 Student Tech & Scholarships">
+                  <option value="tech_fake">🚨 [FAKE RISK] Free 5G Smartphone Scheme (₹199 Courier Fee & Share)</option>
+                  <option value="tech_genuine">✅ [GENUINE TRUE] Official National Scholarship Portal (NSP) Grant</option>
+                </optgroup>
+                <optgroup label="🏠 Housing & Shelter (PMAY)">
+                  <option value="housing_fake">🚨 [FAKE RISK] PM Awas Yojana House Allotment (₹1,500 File Fee)</option>
+                  <option value="housing_genuine">✅ [GENUINE TRUE] Official Pradhan Mantri Awas Yojana (PMAY) Advisory</option>
+                </optgroup>
+                <optgroup label="👧 Women & Child Welfare">
+                  <option value="women_fake">🚨 [FAKE RISK] Sukanya Samriddhi ₹5 Lakh Cash Bonus (₹500 Activation)</option>
+                  <option value="women_genuine">✅ [GENUINE TRUE] Official Sukanya Samriddhi Yojana (SSY) India Post</option>
+                </optgroup>
+                <optgroup label="⚠️ Inconclusive / Unverified Notices">
+                  <option value="unverified_notice">⚠️ [UNVERIFIED] State Youth Skill Allowance Circular</option>
+                </optgroup>
+              </select>
+            </div>
+            
+            <div class="quick-pill-group">
+              <button type="button" class="btn-sample btn-sample-scam" id="btnQuickScam" title="Load High-Risk Scam Sample" data-i18n="btnQuickScam">
+                🚨 Load Scam
+              </button>
+              <button type="button" class="btn-sample btn-sample-genuine" id="btnQuickGenuine" title="Load Genuine Notice" data-i18n="btnQuickGenuine">
+                ✅ Load Genuine
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Sample Indicator Banner -->
+          <div id="activeSampleBanner" class="active-sample-banner hidden">
+            <div class="sample-banner-left">
+              <span id="activeSampleBadge" class="sample-tag-badge">🚨 FAKE SCAM</span>
+              <span id="activeSampleCategory" class="sample-cat-tag" data-i18n="catHealthcare">🏥 Healthcare</span>
+              <span id="activeSampleTitle" class="sample-title-text">Ayushman Golden Card ₹450 Fee Scam</span>
+            </div>
+            <div class="sample-banner-right">
+              <span class="sample-banner-hint" data-i18n="sampleReadyHint">Ready for AI verification ➔</span>
+              <button type="button" class="sample-dismiss-btn" id="btnDismissActiveSample" title="Clear Sample">✕</button>
+            </div>
+          </div>
+
+          <label for="messageInput" class="input-label" style="margin-top: 14px;">
+            <span data-i18n="messageInputLabel">Message Content for AI Verification:</span>
+          </label>
+          <textarea 
+            id="messageInput" 
+            class="textarea-control" 
+            rows="5" 
+            data-i18n-placeholder="inputMessagePlaceholder" 
+            placeholder="Paste suspicious WhatsApp message, SMS text, or speak into microphone... (e.g. 'PM Free Laptop Scheme 2024: Pay ₹299 to register...')"></textarea>
+
+          <!-- Associated Link / Website URL Input -->
+          <div class="associated-link-row" style="margin-top: 12px;">
+            <label for="msgAssociatedUrl" class="input-label" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <span>🌐 Associated Website Link / URL <span style="font-weight: 400; color: var(--text-muted);" data-i18n="associatedLinkOptional">(Optional - verify message & link together):</span></span>
+            </label>
+            <div class="input-with-icon">
+              <span class="input-prefix-icon">🔗</span>
+              <input 
+                type="url" 
+                id="msgAssociatedUrl" 
+                class="input-control" 
+                placeholder="e.g. http://pm-laptop-yojana.online or https://pmkisan.gov.in"
+                style="padding-left: 38px;" data-i18n-placeholder="associatedUrlPlaceholder">
+            </div>
+          </div>
+
+          <div class="form-action-row">
+            <div class="form-action-left" style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" id="btnClearMessage" data-i18n="btnClear">
+                Clear
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnJumpToOcr" title="Upload and scan your screenshot or photo" data-i18n="btnJumpToOcr">
+                📸 Attach Screenshot / Photo
+              </button>
+            </div>
+            <button type="button" class="btn btn-primary" id="btnScanMessage" data-i18n="btnScanAI">
+              <span>⚡</span> <span data-i18n="btnScanAI">AI Scan & Verify Claim</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 2: Screenshot & Photo OCR Scanner -->
+        <div class="tab-pane" id="tabPane-ocr" role="tabpanel">
+          
+          <!-- Citizen Custom Upload Hero Section -->
+          <div class="ocr-user-upload-hero">
+            <div class="ocr-hero-header">
+              <div class="ocr-hero-title-group">
+                <span class="ocr-hero-badge" data-i18n="ocrHeroBadge">📸 Citizen Evidence Upload</span>
+                <h3 class="ocr-hero-title" data-i18n="ocrHeroTitle">Upload Screenshot, Photo, or Notice for AI Optical Verification</h3>
+                <p class="ocr-hero-desc" data-i18n="ocrHeroDesc">
+                  Upload your own mobile screenshot, WhatsApp forward, poster photo, or SMS. InfoShield extracts the text using Optical Character Recognition (OCR), audits any associated links, and cross-references authentic Government of India scheme databases.
+                </p>
+              </div>
+              <div class="ocr-quick-actions">
+                <button type="button" class="btn btn-primary btn-sm" id="btnTriggerBrowse">
+                  <span>📂</span> Choose Screenshot / Photo
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnTriggerCamera" title="Capture photo using device camera">
+                  <span>📷</span> Camera
+                </button>
+              </div>
+            </div>
+
+            <!-- Upload & Scanner Interactive Layout -->
+            <div class="ocr-layout" style="margin-top: 16px;">
+              <!-- Left: Dropzone & Image Preview -->
+              <div class="ocr-input-col">
+                <div class="dropzone-box" id="ocrDropzone">
+                  <div class="dropzone-inner">
+                    <span class="dropzone-icon">📥</span>
+                    <h4 class="dropzone-main-text" data-i18n="dropzoneMainText">Drag & drop your screenshot or photo here</h4>
+                    <p class="dropzone-sub" data-i18n="dropzoneSub">or click to browse from device (JPG, PNG, WEBP, up to 10MB)</p>
+                    <div class="dropzone-hints">
+                      <span class="dropzone-pill">💡 Clipboard: Press <strong>Ctrl+V</strong> anywhere to paste</span>
+                      <span class="dropzone-pill" data-i18n="dropzonePillAuto">⚡ Auto OCR in English + Hindi</span>
+                    </div>
+                  </div>
+                  <input type="file" id="ocrFileInput" accept="image/*" style="display: none;">
+                  <input type="file" id="ocrCameraInput" accept="image/*" capture="environment" style="display: none;">
+                </div>
+
+                <!-- Live Image Preview Card -->
+                <div class="ocr-preview-container hidden" id="ocrPreviewWrapper">
+                  <div class="ocr-preview-header">
+                    <div class="ocr-preview-meta">
+                      <span class="badge-blue" id="ocrFileNameBadge">screenshot.png</span>
+                      <span class="badge-neutral" id="ocrFileSizeBadge">0 KB</span>
+                    </div>
+                    <button type="button" class="btn-clear-preview" id="btnClearOcrImg" title="Remove image">✕ Change</button>
+                  </div>
+                  <div class="ocr-preview-img-box">
+                    <img id="ocrPreviewImg" class="ocr-preview-img" alt="Uploaded Screenshot Preview">
+                    <div class="laser-scanner-line"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: OCR Extracted Text & Associated Link -->
+              <div class="ocr-output-col">
+                <div id="ocrStatusText" class="ocr-status-badge">
+                  <span>✨</span> Ready. Upload or paste your screenshot to begin optical character extraction.
+                </div>
+
+                <!-- OCR Progress Bar -->
+                <div class="ocr-progress-container hidden" id="ocrProgressContainer">
+                  <div class="ocr-progress-bar" id="ocrProgressBar" style="width: 0%;"></div>
+                </div>
+
+                <label for="ocrExtractedText" class="input-label" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                  <span data-i18n="ocrExtractedLabel">📝 Extracted Text from Image (OCR):</span>
+                  <span style="font-size: 0.76rem; color: var(--text-muted); font-weight: normal;" data-i18n="ocrEditableTag">Editable</span>
+                </label>
+                <textarea 
+                  id="ocrExtractedText" 
+                  class="textarea-control" 
+                  style="min-height: 120px;" 
+                  placeholder="Extracted text from your screenshot or photo will appear here automatically. You can also edit or type additional details..." data-i18n-placeholder="ocrExtractedPlaceholder"></textarea>
+
+                <!-- Associated Website Link Input in OCR Tab -->
+                <div class="associated-link-row" style="margin-top: 10px;">
+                  <label for="ocrAssociatedUrl" class="input-label" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                    <span>🌐 Associated Website Link / URL <span style="font-weight: 400; color: var(--text-muted);">(Optional - verify screenshot & link together):</span></span>
+                  </label>
+                  <div class="input-with-icon">
+                    <span class="input-prefix-icon">🔗</span>
+                    <input 
+                      type="url" 
+                      id="ocrAssociatedUrl" 
+                      class="input-control" 
+                      placeholder="e.g. http://ayushman-card-free.xyz/apply-now or https://pmkisan.gov.in"
+                      style="padding-left: 38px;">
+                  </div>
+                </div>
+
+                <div class="form-action-row" style="margin-top: 14px;">
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnClearOcr" data-i18n="btnClearOcr">
+                      Clear Text
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnCopyOcrToMessage" title="Copy this text into Message tab" data-i18n="btnCopyOcrToMessage">
+                      💬 Transfer to Message Tab
+                    </button>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="btnScanExtracted">
+                    <span>⚡</span> Run AI Verification on Image & Link
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Preset Samples Gallery (For Quick Testing) -->
+          <div class="ocr-sample-gallery" style="margin-top: 26px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px;">
+            <div class="gallery-header-row" id="togglePresetGallery">
+              <div>
+                <span class="gallery-title" style="display: flex; align-items: center; gap: 8px;">
+                  <span>📂</span> <strong>Or Test with 9 Pre-Loaded Sample Screenshots</strong>
+                  <span class="badge-neutral" style="font-size: 0.72rem; padding: 2px 8px; border-radius: 12px; background: rgba(255,255,255,0.08);" data-i18n="presetGalleryBadge">Presets</span>
+                </span>
+                <span class="gallery-subtitle" data-i18n="presetGallerySubtitle">Don't have your own image handy? Click any real-world mobile screenshot below to test the verification pipeline:</span>
+              </div>
+            </div>
+            <div class="screenshot-cards-grid" id="screenshotCardsGrid" style="margin-top: 12px;">
+              <!-- Card 1 -->
+              <button type="button" class="screenshot-card is-fake active" data-sample-key="scam_healthcare" title="Click to test fake Ayushman card screenshot">
+                <div class="ss-card-badge badge-red">🚨 FAKE SCAM</div>
+                <div class="ss-card-icon">🏥</div>
+                <div class="ss-card-info">
+                  <strong>Ayushman ₹450 Fee</strong>
+                  <span>Healthcare WhatsApp Scam</span>
+                </div>
+              </button>
+
+              <!-- Card 2 -->
+              <button type="button" class="screenshot-card is-fake" data-sample-key="scam_laptop" title="Click to test PM free laptop screenshot">
+                <div class="ss-card-badge badge-red">🚨 FAKE SCAM</div>
+                <div class="ss-card-icon">💻</div>
+                <div class="ss-card-info">
+                  <strong>PM Free Laptop</strong>
+                  <span>Welfare Viral Forward</span>
+                </div>
+              </button>
+
+              <!-- Card 3 -->
+              <button type="button" class="screenshot-card is-fake" data-sample-key="scam_utility" title="Click to test electricity bill threat">
+                <div class="ss-card-badge badge-red">🚨 FAKE SCAM</div>
+                <div class="ss-card-icon">⚡</div>
+                <div class="ss-card-info">
+                  <strong>Power Cut Alert</strong>
+                  <span>Electricity SMS Phishing</span>
+                </div>
+              </button>
+
+              <!-- Card 4 -->
+              <button type="button" class="screenshot-card is-fake" data-sample-key="scam_mudra" title="Click to test fake Mudra Loan stamp duty">
+                <div class="ss-card-badge badge-red">🚨 FAKE SCAM</div>
+                <div class="ss-card-icon">💼</div>
+                <div class="ss-card-info">
+                  <strong>Mudra ₹1,250 Stamp</strong>
+                  <span>0% Interest Loan Fraud</span>
+                </div>
+              </button>
+
+              <!-- Card 5 -->
+              <button type="button" class="screenshot-card is-fake" data-sample-key="scam_smartphone" title="Click to test free smartphone courier charge">
+                <div class="ss-card-badge badge-red">🚨 FAKE SCAM</div>
+                <div class="ss-card-icon">📱</div>
+                <div class="ss-card-info">
+                  <strong>Free 5G Phone</strong>
+                  <span>₹199 Courier Fee Trap</span>
+                </div>
+              </button>
+
+              <!-- Card 6 -->
+              <button type="button" class="screenshot-card is-genuine" data-sample-key="genuine_pmkisan" title="Click to test official PM-KISAN SMS">
+                <div class="ss-card-badge badge-green">✅ GENUINE</div>
+                <div class="ss-card-icon">🌾</div>
+                <div class="ss-card-info">
+                  <strong>PM-KISAN DBT</strong>
+                  <span>Official GoI SMS Notice</span>
+                </div>
+              </button>
+
+              <!-- Card 7 -->
+              <button type="button" class="screenshot-card is-genuine" data-sample-key="genuine_healthcare" title="Click to test official Ayushman advisory">
+                <div class="ss-card-badge badge-green">✅ GENUINE</div>
+                <div class="ss-card-icon">🏥</div>
+                <div class="ss-card-info">
+                  <strong>Ayushman ABHA</strong>
+                  <span>Official NHA Advisory</span>
+                </div>
+              </button>
+
+              <!-- Card 8 -->
+              <button type="button" class="screenshot-card is-genuine" data-sample-key="genuine_sukanya" title="Click to test official Sukanya Samriddhi notice">
+                <div class="ss-card-badge badge-green">✅ GENUINE</div>
+                <div class="ss-card-icon">👧</div>
+                <div class="ss-card-info">
+                  <strong>Sukanya Samriddhi</strong>
+                  <span>India Post Official Notice</span>
+                </div>
+              </button>
+
+              <!-- Card 9 -->
+              <button type="button" class="screenshot-card is-genuine" data-sample-key="genuine_pmay" title="Click to test official PMAY housing notice">
+                <div class="ss-card-badge badge-green">✅ GENUINE</div>
+                <div class="ss-card-icon">🏠</div>
+                <div class="ss-card-info">
+                  <strong>PMAY Housing</strong>
+                  <span>MoHUA Subsidy Notice</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Link / URL Auditor -->
+        <div class="tab-pane" id="tabPane-url" role="tabpanel">
+          <div class="section-header-block" style="text-align: left; margin-bottom: 16px;">
+            <h3 style="color: #fff; font-size: 1.2rem;" data-i18n="urlTitle">Official Domain & Phishing Link Auditor</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem;" data-i18n="urlSubtitle">
+              Check whether a website domain officially belongs to the Government of India (.gov.in / .nic.in) or is a high-risk phishing scam.
+            </p>
+          </div>
+
+          <!-- URL Presets Bar -->
+          <div class="url-presets-bar">
+            <span class="url-presets-label" data-i18n="urlPresetsLabel">Preset Links to Test (14 Real-World Samples):</span>
+            
+            <div class="url-group-section">
+              <span class="url-group-title" data-i18n="urlGroupFake">🚨 Fake Phishing Traps:</span>
+              <div class="url-preset-chips" id="urlPresetChipsFake">
+                <button type="button" class="url-chip chip-fake" data-url="http://pm-laptop-yojana.online/apply" title="Fake PM Laptop Phishing Domain">
+                  🚨 PM Laptop (.online)
+                </button>
+                <button type="button" class="url-chip chip-fake" data-url="http://ayushman-card-free.xyz/apply-now" title="Fake Ayushman Phishing Domain">
+                  🚨 Ayushman VIP (.xyz)
+                </button>
+                <button type="button" class="url-chip chip-fake" data-url="http://mudra-loan-instant-approval.top/pay" title="Fake Mudra Loan Domain">
+                  🚨 Mudra Loan (.top)
+                </button>
+                <button type="button" class="url-chip chip-fake" data-url="http://sbi-kyc-verify.online/sbi.apk" title="Fake SBI Yono APK">
+                  🚨 SBI Yono APK (.online)
+                </button>
+                <button type="button" class="url-chip chip-fake" data-url="http://free-5g-smartphone.xyz" title="Fake 5G Phone Phishing">
+                  🚨 Free 5G Phone (.xyz)
+                </button>
+                <button type="button" class="url-chip chip-fake" data-url="http://pm-awas-yojana-allotment.site/register" title="Fake PMAY Allotment">
+                  🚨 PMAY Allotment (.site)
+                </button>
+              </div>
+            </div>
+
+            <div class="url-group-section" style="margin-top: 12px;">
+              <span class="url-group-title" data-i18n="urlGroupGenuine">✅ Authentic Government Portals:</span>
+              <div class="url-preset-chips" id="urlPresetChipsGenuine">
+                <button type="button" class="url-chip chip-genuine" data-url="https://pmkisan.gov.in" title="Official PM-KISAN Portal">
+                  ✅ PM-KISAN (.gov.in)
+                </button>
+                <button type="button" class="url-chip chip-genuine" data-url="https://myscheme.gov.in" title="Official myScheme Gateway">
+                  ✅ myScheme (.gov.in)
+                </button>
+                <button type="button" class="url-chip chip-genuine" data-url="https://beneficiary.nha.gov.in" title="Official Ayushman NHA Portal">
+                  ✅ Ayushman NHA (.gov.in)
+                </button>
+                <button type="button" class="url-chip chip-genuine" data-url="https://pmsuryaghar.gov.in" title="Official Solar Subsidy Portal">
+                  ✅ PM Surya Ghar (.gov.in)
+                </button>
+                <button type="button" class="url-chip chip-genuine" data-url="https://scholarships.gov.in" title="Official National Scholarship Portal">
+                  ✅ Scholarships (.gov.in)
+                </button>
+                <button type="button" class="url-chip chip-genuine" data-url="https://cybercrime.gov.in" title="National Cyber Crime Reporting">
+                  ✅ Cybercrime (.gov.in)
+                </button>
+              </div>
+            </div>
+
+            <div class="url-group-section" style="margin-top: 12px;">
+              <span class="url-group-title" data-i18n="urlGroupWarning">⚠️ Unofficial / Third-Party News Blogs:</span>
+              <div class="url-preset-chips" id="urlPresetChipsWarning">
+                <button type="button" class="url-chip chip-warning" data-url="https://all-schemes-news-portal.com" title="Third-Party News Blog">
+                  ⚠️ Scheme News (.com)
+                </button>
+                <button type="button" class="url-chip chip-warning" data-url="https://sarkariyojananews.in" title="Private News Aggregator">
+                  ⚠️ Sarkari News (.in)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="url-check-box" style="margin-top: 14px;">
+            <input 
+              type="url" 
+              id="urlInput" 
+              class="url-input-field" 
+              placeholder="Enter scheme website URL (e.g. http://pm-laptop-yojana.online or https://pmkisan.gov.in)" 
+              data-i18n-placeholder="urlInputPlaceholder">
+            <button type="button" class="btn btn-primary" id="btnAuditUrl" data-i18n="btnAuditUrl">
+              Audit Link Credibility
+            </button>
+          </div>
+
+          <div id="urlAuditResult" class="hidden"></div>
+        </div>
+
+        <!-- Tab 4: WhatsApp Bot Simulator (Live Interactive Experience) -->
+        <div class="tab-pane" id="tabPane-bot" role="tabpanel">
+          <div class="section-header-block" style="text-align: left; margin-bottom: 14px;">
+            <h3 style="color: #fff; font-size: 1.2rem;" data-i18n="botHeaderTitle">💬 WhatsApp Misinformation Defense Bot (Interactive Simulator)</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem;" data-i18n="botHeaderSubtitle">
+              Over 90% of scheme misinformation spreads via WhatsApp forwards. Test our live automated WhatsApp verification bot simulator below!
+            </p>
+          </div>
+
+          <!-- WhatsApp Chat Simulator Frame -->
+          <div class="whatsapp-simulator-frame">
+            <!-- WA Header -->
+            <div class="wa-header">
+              <div class="wa-profile-info">
+                <div class="wa-avatar-box">
+                  <img src="assets/logo.jpg" alt="InfoShield Bot Avatar" class="wa-avatar-img">
+                  <span class="wa-status-dot"></span>
+                </div>
+                <div class="wa-text-details">
+                  <div class="wa-name-row">
+                    <span class="wa-bot-name" data-i18n="waBotName">InfoShield Fact-Check Bot</span>
+                    <span class="wa-verified-badge" title="Official Verified WhatsApp Business Account">✓</span>
+                  </div>
+                  <span class="wa-bot-status" id="waBotStatus" data-i18n="waBotStatus">online • 24/7 National AI Defense</span>
+                </div>
+              </div>
+              <div class="wa-header-actions">
+                <span class="wa-header-icon" title="End-to-End Encrypted">🔒</span>
+                <span class="wa-badge-pill" data-i18n="waBadgeOfficial">Official 🇮🇳</span>
+              </div>
+            </div>
+
+            <!-- WA Messages Container -->
+            <div class="wa-chat-body" id="waChatBody">
+              <!-- Welcome Bot Message -->
+              <div class="wa-message-row incoming">
+                <div class="wa-bubble wa-bubble-incoming">
+                  <div class="wa-sender-tag" data-i18n="waSenderTag">InfoShield Official Bot 🇮🇳</div>
+                  <p>
+                    🙏 <strong>Namaste! Welcome to InfoShield Civic Misinformation Defense.</strong><br><br>
+                    Forward any suspicious WhatsApp message, SMS link, or welfare scheme claim here. I will instantly cross-reference against official Government of India ground truth databases (<code>myScheme.gov.in</code>, <code>pmkisan.gov.in</code>, PIB Fact Check) and return an Explainable AI verdict!
+                  </p>
+                  <span class="wa-msg-time">Just now</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- WA Quick Prompts Bar -->
+            <div class="wa-quick-chips-bar">
+              <span class="wa-chips-label" data-i18n="waChipsLabel">Try Prompts:</span>
+              <button type="button" class="wa-chip-btn" data-text="Mubarak ho! Aapka PM Mudra Loan ₹10,00,000 approve ho gaya hai 0% byaj par. Turant disburse karne ke liye 1250 rs stamp duty UPI se bhejo: http://mudra-approval.top par.">
+                💰 PM Mudra Stamp Fee
+              </button>
+              <button type="button" class="wa-chip-btn" data-text="Bhai suno! PM Kisan Samman Nidhi me 25000 ka special bonus mil raha hai! Bas 500 rs registration fees is link pe bhejo: http://pmkisan-bonus25000.xyz Jaldi karo last date aaj raat tak hai. 5 dosto ko forward karo!">
+                🌾 PM Kisan ₹25,000 Bonus
+              </button>
+              <button type="button" class="wa-chip-btn" data-text="PM Free Laptop Scheme 2024: Under Digital India, free HP laptops to all 10th/12th students. Pay ₹299 delivery charge at http://pm-laptop-yojana.online and forward to 5 groups.">
+                💻 Free Laptop ₹299 Fee
+              </button>
+              <button type="button" class="wa-chip-btn" data-text="National Health Authority Official Notice: Ayushman Bharat ABHA Health Account creation is 100% FREE. Never pay fee or share OTP. Visit https://beneficiary.nha.gov.in">
+                🏥 Genuine Ayushman Notice
+              </button>
+            </div>
+
+            <!-- WA Input Bar -->
+            <div class="wa-input-bar">
+              <input 
+                type="text" 
+                id="waInputText" 
+                class="wa-input-control" 
+                placeholder="Forward message here or type claim to verify..." data-i18n-placeholder="waInputPlaceholder">
+              <button type="button" class="wa-send-btn" id="btnWaSend" title="Send to InfoShield Bot">
+                <span>➤</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Verification Results Area (Revealed after AI Scan) -->
+      <div id="resultsContainer" class="results-wrapper hidden" aria-live="polite">
+        
+        <!-- Results Section Header -->
+        <div class="results-section-header">
+          <div class="results-header-left">
+            <span class="results-kicker" data-i18n="resultsKicker">⚡ AI Verification Verdict</span>
+            <h2 class="results-heading" data-i18n="resultsHeading">Explainable Analysis & Verification Audit</h2>
+          </div>
+          <div class="results-header-right">
+            <button type="button" class="btn btn-whatsapp-direct btn-sm" id="btnWhatsAppDirect" title="Direct Share Warning on WhatsApp" data-i18n="btnWhatsAppDirect">
+              📱 Send on WhatsApp
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="btnShareCard" title="Generate Shareable Alert Graphic Card" data-i18n="btnShareCardAlert">
+              🖼️ Shareable Alert Card
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnNewScan" title="Scan Another Message" data-i18n="btnNewScan">
+              🔄 Scan Another
+            </button>
+          </div>
+        </div>
+
+        <!-- Master Verdict Hero Card -->
+        <div id="verdictCard" class="verdict-card status-green">
+          <div class="verdict-main-content">
+            <div class="verdict-icon-box" id="verdictIconWrapper">
+              <!-- Injected SVG -->
+            </div>
+            <div class="verdict-text-block">
+              <div class="verdict-badge-row">
+                <span id="verdictBadge" class="verdict-badge-pill">STATUS</span>
+                <span id="verdictCategoryBadge" class="verdict-category-pill">🏛️ Welfare Scheme</span>
+                <span id="verdictEngineBadge" class="verdict-engine-pill">⚡ Groq LPU Cloud AI</span>
+                <button type="button" class="btn-voice-readout" id="btnSpeakVerdict" title="Listen to AI Verdict aloud (On-Device Web Speech)">
+                  <span id="speakIcon">🔊</span> <span id="speakLabel" data-i18n="speakLabel">Listen to Verdict</span>
+                </button>
+              </div>
+              <h3 id="verdictTitle" class="verdict-title">Verdict Title</h3>
+              <p id="verdictDescription" class="verdict-desc">Verdict explanation will show here.</p>
+            </div>
+          </div>
+
+          <!-- Verified Result: Is Information True or False? High Impact Banner -->
+          <div class="truth-verdict-banner is-false" id="truthVerdictBanner">
+            <div class="truth-badge-row">
+              <span class="truth-kicker" data-i18n="truthKicker">VERIFIED RESULT:</span>
+              <span class="truth-stamp-badge" id="truthStampBadge">❌ FALSE / SCAM</span>
+            </div>
+            <div class="truth-main-statement">
+              <div class="truth-question-row">
+                <span class="truth-question" data-i18n="truthQuestionText">Is this information True or False?</span>
+                <span class="truth-answer-highlight" id="truthAnswerHighlight">➔ <strong>FALSE (Scam Detected)</strong></span>
+              </div>
+              <p class="truth-sub-desc" id="truthSubDesc">
+                This message is FALSE. It does not exist in any official Government of India database and contains malicious/fraudulent triggers.
+              </p>
+            </div>
+          </div>
+
+          <div class="verdict-risk-gauge-box">
+            <div class="risk-gauge-header">
+              <span class="risk-gauge-label" data-i18n="riskGaugeLabel">Calculated Fraud Risk</span>
+              <span id="riskGaugeScore" class="risk-gauge-score">0% Risk</span>
+            </div>
+            <div class="risk-bar-container">
+              <div id="riskGaugeFill" class="risk-bar-fill"></div>
+            </div>
+            <div class="risk-scale-labels">
+              <span data-i18n="riskScaleLow">0% Low (Safe)</span>
+              <span data-i18n="riskScaleCaution">50% Caution</span>
+              <span data-i18n="riskScaleCritical">100% Critical</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Verification & Threat Spectrum Analysis -->
+        <section class="palindrome-card" id="palindromeGraphSection" aria-labelledby="palTitleH">
+          <div class="palindrome-head">
+            <div class="palindrome-title-wrap">
+              <span class="palindrome-icon">⚖️</span>
+              <div>
+                <h4 class="palindrome-title" id="palTitleH" data-i18n="palindromeGraphTitle">Official Verification & Threat Spectrum Analysis</h4>
+                <p class="palindrome-subtitle" data-i18n="palindromeGraphSubtitle">
+                  Visual Evidence Balance: Official Government Records vs Detected Fraud Signals
+                </p>
+              </div>
+            </div>
+            <div class="palindrome-equilibrium-badge is-scam" id="palEquilibriumBadge">
+              ⚖️ Scam Risk Tilt
+            </div>
+          </div>
+
+          <div class="palindrome-visual">
+            <div class="palindrome-wings-header">
+              <div class="wing-tag wing-genuine">
+                <span class="wing-dot dot-green">●</span>
+                <strong data-i18n="wingGenuineTitle">GENUINE GOVERNMENT PROGRAM</strong>
+                <span class="wing-score-val" id="wingGenuineScore">0%</span>
+              </div>
+              <div class="wing-axis-center">
+                <span data-i18n="axisEquilibrium">EQUILIBRIUM (0)</span>
+              </div>
+              <div class="wing-tag wing-scam">
+                <strong data-i18n="wingScamTitle">FRAUDULENT SCAM RISK</strong>
+                <span class="wing-dot dot-red">●</span>
+                <span class="wing-score-val" id="wingScamScore">0%</span>
+              </div>
+            </div>
+
+            <div class="palindrome-track-wrapper">
+              <div class="palindrome-track">
+                <div class="palindrome-half half-genuine">
+                  <div class="palindrome-fill fill-genuine" id="palindromeFillGenuine"></div>
+                </div>
+                <div class="palindrome-center-axis"></div>
+                <div class="palindrome-half half-scam">
+                  <div class="palindrome-fill fill-scam" id="palindromeFillScam"></div>
+                </div>
+                <div class="palindrome-pointer" id="palindromePointer" style="left: 50%;">
+                  <div class="pointer-bubble" id="pointerBubble">0%</div>
+                  <div class="pointer-needle"></div>
+                </div>
+              </div>
+              <div class="palindrome-ticks">
+                <span class="tick-label text-green">-100%</span>
+                <span class="tick-label text-green">-75%</span>
+                <span class="tick-label text-green">-50%</span>
+                <span class="tick-label text-green">-25%</span>
+                <span class="tick-label text-center" data-i18n="axisNeutral">0 (Neutral)</span>
+                <span class="tick-label text-red">+25%</span>
+                <span class="tick-label text-red">+50%</span>
+                <span class="tick-label text-red">+75%</span>
+                <span class="tick-label text-red">+100%</span>
+              </div>
+            </div>
+
+            <!-- Quick-Glance Visual Comparison Metrics -->
+            <div class="visual-metrics-grid" id="visualMetricsGrid">
+              <div class="metric-card metric-scam">
+                <div class="metric-top">
+                  <span class="metric-label" data-i18n="metricScamLabel">Detected Scam Triggers</span>
+                  <span class="metric-val text-red" id="metricScamCount">0 Found</span>
+                </div>
+                <div class="metric-bar-track">
+                  <div class="metric-bar-fill fill-scam-bar" id="metricScamBar" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="metric-card metric-trust">
+                <div class="metric-top">
+                  <span class="metric-label" data-i18n="metricTrustLabel">Verified Trust Signals</span>
+                  <span class="metric-val text-green" id="metricTrustCount">0 Found</span>
+                </div>
+                <div class="metric-bar-track">
+                  <div class="metric-bar-fill fill-trust-bar" id="metricTrustBar" style="width: 0%;"></div>
+                </div>
+              </div>
+              <div class="metric-card metric-official">
+                <div class="metric-top">
+                  <span class="metric-label" data-i18n="metricOfficialLabel">Government DB Match</span>
+                  <span class="metric-val text-blue" id="metricOfficialStatus">Not Verified</span>
+                </div>
+                <div class="metric-bar-track">
+                  <div class="metric-bar-fill fill-official-bar" id="metricOfficialBar" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="palindrome-evidence-columns">
+              <div class="palindrome-col col-left">
+                <span class="palindrome-col-title" data-i18n="palTrustSignals">Verified Trust Signals</span>
+                <div id="palindromeTrustCol"></div>
+              </div>
+              <div class="palindrome-col col-center">
+                <div class="palindrome-summary-box" id="palindromeSummaryBox"></div>
+              </div>
+              <div class="palindrome-col col-right">
+                <span class="palindrome-col-title" data-i18n="palThreatTriggers">Detected Threat Triggers</span>
+                <div id="palindromeThreatCol"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Official Government Verification Gateway Card -->
+        <section class="official-gateway-card" id="officialVerifyGateway" aria-labelledby="ovgTitleH">
+          <div class="ovg-header">
+            <div class="ovg-emblem">🇮🇳</div>
+            <div class="ovg-title-block">
+              <div class="ovg-badge-row">
+                <span class="ovg-badge-verified" data-i18n="ovgOfficialGateway">✓ .GOV.IN VERIFIED GATEWAY</span>
+                <span class="ovg-badge-security" data-i18n="ovgSecuritySSL">🔒 Official Government Portal</span>
+              </div>
+              <h3 class="ovg-title" id="ovgTitleH" data-i18n="officialGatewayTitle">Verify Directly on Official Government Portal</h3>
+              <p class="ovg-desc" data-i18n="officialGatewayDesc">
+                Never rely solely on social media forwards. Always cross-check scheme claims and apply through official Government of India websites.
+              </p>
+            </div>
+          </div>
+
+          <div class="ovg-body">
+            <div class="ovg-primary-box" id="ovgPrimaryBox">
+              <div class="ovg-link-info">
+                <span class="ovg-link-label" id="ovgPortalName" data-i18n="verifyScheme">Official Portal of this Scheme:</span>
+                <a href="https://myscheme.gov.in" target="_blank" rel="noopener noreferrer" class="ovg-link-url" id="ovgPortalUrl">
+                  https://myscheme.gov.in
+                </a>
+              </div>
+              <a href="https://myscheme.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary ovg-action-btn" id="ovgActionBtn" data-i18n="btnOpenOfficial">
+                🌐 Open Official Portal (.gov.in) ↗
+              </a>
+            </div>
+
+            <div class="ovg-secondary-grid">
+              <a href="https://www.myscheme.gov.in" target="_blank" rel="noopener noreferrer" class="ovg-quick-link">
+                <span class="oql-icon">🏛️</span>
+                <div class="oql-text">
+                  <strong>myScheme National Portal</strong>
+                  <span>myscheme.gov.in</span>
+                </div>
+                <span class="oql-arrow">↗</span>
+              </a>
+              <a href="https://factcheck.pib.gov.in" target="_blank" rel="noopener noreferrer" class="ovg-quick-link">
+                <span class="oql-icon">📰</span>
+                <div class="oql-text">
+                  <strong>PIB Fact Check Portal</strong>
+                  <span>factcheck.pib.gov.in</span>
+                </div>
+                <span class="oql-arrow">↗</span>
+              </a>
+              <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="ovg-quick-link">
+                <span class="oql-icon">🚨</span>
+                <div class="oql-text">
+                  <strong>National Cyber Crime Portal</strong>
+                  <span>cybercrime.gov.in (Helpline: 1930)</span>
+                </div>
+                <span class="oql-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Citizen Safety Guide: Prevention & What You Should Do -->
+        <section class="prevention-action-section" id="preventionSection" aria-labelledby="preventionTitleH">
+          <div class="prevention-header">
+            <div class="prevention-icon">🛡️</div>
+            <div>
+              <h3 class="prevention-title" id="preventionTitleH" data-i18n="preventionSectionTitle">Citizen Safety Guide: Prevention & What You Should Do</h3>
+              <p class="prevention-subtitle" data-i18n="preventionSectionSubtitle">
+                Essential precautions to protect yourself and family from financial fraud and fake schemes
+              </p>
+            </div>
+          </div>
+
+          <div class="prevention-grid">
+            <!-- What NOT To Do -->
+            <div class="prevention-card do-not-card">
+              <div class="prevention-card-head">
+                <span class="p-card-badge badge-red" data-i18n="pCardDoNotBadge">🚫 STRICTLY AVOID</span>
+                <h4 class="p-card-title" data-i18n="pCardDoNotTitle">What NOT To Do (Prevention)</h4>
+              </div>
+              <ul class="prevention-list">
+                <li>
+                  <span class="plist-icon">❌</span>
+                  <div><strong>Never Pay Any Fee:</strong> Genuine government schemes NEVER ask for registration, processing, stamp, or courier fees.</div>
+                </li>
+                <li>
+                  <span class="plist-icon">❌</span>
+                  <div><strong>Never Share OTP or Bank Info:</strong> Never share Aadhaar OTP, bank account numbers, or UPI PINs.</div>
+                </li>
+                <li>
+                  <span class="plist-icon">❌</span>
+                  <div><strong>Do Not Click Unofficial Links:</strong> Avoid domains ending in <code>.online</code>, <code>.xyz</code>, <code>.top</code>, <code>.site</code>, or downloading third-party APKs.</div>
+                </li>
+                <li>
+                  <span class="plist-icon">❌</span>
+                  <div><strong>Do Not Forward Unverified Messages:</strong> Break the misinformation chain on WhatsApp and Telegram groups.</div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- What You SHOULD Do -->
+            <div class="prevention-card do-card">
+              <div class="prevention-card-head">
+                <span class="p-card-badge badge-green" data-i18n="pCardDoBadge">✅ RECOMMENDED ACTIONS</span>
+                <h4 class="p-card-title" data-i18n="pCardDoTitle">What You SHOULD Do</h4>
+              </div>
+              <ul class="prevention-list">
+                <li>
+                  <span class="plist-icon">🌐</span>
+                  <div><strong>Cross-Check on .gov.in:</strong> Only verify through official portals ending with <code>.gov.in</code> or <code>.nic.in</code>.</div>
+                </li>
+                <li>
+                  <span class="plist-icon">🏛️</span>
+                  <div><strong>Search on myScheme.gov.in:</strong> Verify real eligibility criteria on the Central Scheme Portal.</div>
+                </li>
+                <li>
+                  <span class="plist-icon">📞</span>
+                  <div><strong>Report Fraud Immediately:</strong> If you lost money, dial National Cyber Crime Helpline <strong>1930</strong> or register at <strong>cybercrime.gov.in</strong>.</div>
+                </li>
+                <li>
+                  <span class="plist-icon">📢</span>
+                  <div><strong>Warn the Sender:</strong> Inform the person who sent this forward that it is an audited fake scam.</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Benefit & Fee Mismatch Alert Banner (Ground Truth Discrepancy) -->
+        <div id="benefitMismatchCard" class="benefit-mismatch-banner hidden">
+          <div class="mismatch-banner-icon">⚖️</div>
+          <div class="mismatch-banner-body">
+            <div class="mismatch-badge-row">
+              <span class="mismatch-status-pill" data-i18n="mismatchStatusPill">🚨 GROUND TRUTH BENEFIT MISMATCH</span>
+              <span id="mismatchMultiplierBadge" class="mismatch-multiplier-pill">Exaggerated Claim</span>
+            </div>
+            <h4 id="mismatchTitle" class="mismatch-heading" data-i18n="mismatchTitle">Claim Exceeds Official Government Limit!</h4>
+            <p id="mismatchDetails" class="mismatch-desc">Explanation of discrepancy.</p>
+            <div class="mismatch-vs-box">
+              <div class="vs-claimed">
+                <span class="vs-label" data-i18n="vsClaimedLabel">Claimed in Forward:</span>
+                <span id="mismatchClaimedVal" class="vs-num text-red">₹25,000</span>
+              </div>
+              <span class="vs-separator">≠</span>
+              <div class="vs-official">
+                <span class="vs-label" data-i18n="vsOfficialLabel">Official Real Cap (myScheme.gov.in):</span>
+                <span id="mismatchOfficialVal" class="vs-num text-green">₹6,000 / year</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Phrase Highlighting Box (Explainable AI Snippet) -->
+        <div id="highlightedEvidenceCard" class="highlighted-evidence-card">
+          <div class="highlighted-evidence-header">
+            <div class="highlighted-header-left">
+              <span class="highlighted-icon">🖍️</span>
+              <h4 class="highlighted-title" data-i18n="highlightedTitle">Original Message with Flagged Suspicious Phrases</h4>
+            </div>
+            <span class="highlighted-subtitle" data-i18n="highlightedSubtitle">Colored tags indicate detected scam triggers & social engineering tactics</span>
+          </div>
+          <div id="highlightedTextDisplay" class="highlighted-text-body">
+            <!-- Populated dynamically with marked phrases -->
+          </div>
+        </div>
+
+        <!-- 3-Pillar Explainable Evidence & Action Grid -->
+        <div class="verdict-three-pillars">
+          
+          <!-- Pillar 1: AI Evidence & Red Flags -->
+          <div class="pillar-card pillar-evidence">
+            <div class="pillar-header">
+              <div class="pillar-title-group">
+                <span class="pillar-icon">🔍</span>
+                <h4 class="pillar-title" data-i18n="pillar1Title">1. AI Detected Indicators</h4>
+              </div>
+              <span id="pillarEvidenceCountBadge" class="pillar-count-badge">0 Found</span>
+            </div>
+            <div class="pillar-body" id="pillarEvidenceBody">
+              <!-- Dynamically populated red flags or trust signals -->
+            </div>
+          </div>
+
+          <!-- Pillar 2: Government Knowledge Base Ground Truth -->
+          <div class="pillar-card pillar-groundtruth">
+            <div class="pillar-header">
+              <div class="pillar-title-group">
+                <span class="pillar-icon">🏛️</span>
+                <h4 class="pillar-title" data-i18n="pillar2Title">2. Government Ground Truth</h4>
+              </div>
+              <span id="pillarGroundTruthBadge" class="pillar-status-badge badge-green" data-i18n="pillar2Badge">Verified DB</span>
+            </div>
+            <div class="pillar-body" id="pillarGroundTruthBody">
+              <!-- Dynamically populated matched scheme or PIB debunk info -->
+            </div>
+          </div>
+
+          <!-- Pillar 3: Citizen Action Checklist & Safe Links -->
+          <div class="pillar-card pillar-actions">
+            <div class="pillar-header">
+              <div class="pillar-title-group">
+                <span class="pillar-icon">🛡️</span>
+                <h4 class="pillar-title" data-i18n="pillar3Title">3. Citizen Action & Safety Guide</h4>
+              </div>
+              <span class="pillar-status-badge badge-blue" data-i18n="pillar3Badge">Safe Protocol</span>
+            </div>
+            <div class="pillar-body">
+              <ul id="safetyAdvisoryList" class="safety-action-list">
+                <!-- Action points -->
+              </ul>
+              <div class="pillar-action-buttons">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm w-full" id="btnVisitOfficial" data-i18n="btnVisitOfficial">
+                  🌐 Open Official Portal (.gov.in) ↗
+                </a>
+                <button type="button" class="btn btn-danger btn-sm w-full" id="btnReportScam" data-i18n="btnReportScam">
+                  🚨 File Cyber Fraud Report (1930)
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Official Schemes Directory Section -->
+    <section id="schemesSection" style="margin-top: 60px;">
+      <div class="section-header-block">
+        <h2 class="section-title" data-i18n="schemesSectionTitle">Official Government Schemes Directory</h2>
+        <p class="section-subtitle" data-i18n="schemesSectionSubtitle">
+          Browse verified Central & State welfare initiatives with direct links to official '.gov.in' portals.
+        </p>
+      </div>
+
+      <div class="schemes-filter-row">
+        <input 
+          type="text" 
+          id="schemeSearchInput" 
+          class="filter-input" 
+          placeholder="Search by scheme name, keywords (e.g. Kisan, Housing, Solar, Girl Child)..." data-i18n-placeholder="schemeSearchPlaceholder">
+        
+        <select id="schemeCategoryFilter" class="filter-select" aria-label="Filter Schemes by Category">
+          <option value="all" data-i18n="optAllCategories">All Categories</option>
+          <option value="Agriculture" data-i18n="optAgriculture">Agriculture & Farmers</option>
+          <option value="Housing" data-i18n="optHousing">Housing & Shelter</option>
+          <option value="Healthcare" data-i18n="optHealthcare">Healthcare</option>
+          <option value="Women" data-i18n="optWomen">Women & Child</option>
+          <option value="Energy" data-i18n="optEnergy">Energy & Solar</option>
+          <option value="Financial" data-i18n="optFinancial">Financial Support & Loans</option>
+          <option value="Education" data-i18n="optEducation">Education & Students</option>
+        </select>
+      </div>
+
+      <div id="schemesListContainer" class="schemes-grid"></div>
+    </section>
+
+    <!-- PIB Fact-Checked Scams Section -->
+    <section id="pibSection" style="margin-top: 60px;">
+      <div class="section-header-block">
+        <h2 class="section-title" data-i18n="pibSectionTitle">PIB Fact Check: Viral Scams Debunked</h2>
+        <p class="section-subtitle" data-i18n="pibSectionSubtitle">
+          Real cases of deceptive messages and fraudulent government claims debunked by the Press Information Bureau.
+        </p>
+      </div>
+
+      <div id="pibAlertsContainer" class="pib-grid"></div>
+    </section>
+
+    <!-- SDG Alignment Section (Slide 8) -->
+    <section id="sdgSection" class="sdg-section">
+      <div class="container">
+        <div class="section-header-block">
+          <h2 class="section-title" data-i18n="sdgTitle">Alignment with UN Sustainable Development Goals</h2>
+          <p class="section-subtitle" data-i18n="sdgSectionSubtitle">
+            How InfoShield contributes to social resilience, digital empowerment, and inclusive governance.
+          </p>
+        </div>
+
+        <div class="sdg-grid">
+          <div class="sdg-card">
+            <div class="sdg-icon-badge sdg-11">11</div>
+            <h3 class="sdg-card-title" data-i18n="sdg11Title">SDG 11: Sustainable Cities & Communities</h3>
+            <p class="sdg-card-desc" data-i18n="sdg11Desc">
+              Protects vulnerable citizens from financial fraud and misleading information regarding civic and public welfare initiatives.
+            </p>
+          </div>
+
+          <div class="sdg-card">
+            <div class="sdg-icon-badge sdg-9">9</div>
+            <h3 class="sdg-card-title" data-i18n="sdg9Title">SDG 9: Industry, Innovation & Infrastructure</h3>
+            <p class="sdg-card-desc" data-i18n="sdg9Desc">
+              Applies advanced Natural Language Processing and heuristic AI models to solve real-world misinformation challenges.
+            </p>
+          </div>
+
+          <div class="sdg-card">
+            <div class="sdg-icon-badge sdg-4">4</div>
+            <h3 class="sdg-card-title" data-i18n="sdg4Title">SDG 4: Quality Education & Digital Literacy</h3>
+            <p class="sdg-card-desc" data-i18n="sdg4Desc">
+              Educates citizens on identifying digital red flags, verifying evidence, and navigating genuine government channels.
+            </p>
+          </div>
+
+          <div class="sdg-card">
+            <div class="sdg-icon-badge sdg-16">16</div>
+            <h3 class="sdg-card-title" data-i18n="sdg16Title">SDG 16: Peace, Justice & Strong Institutions</h3>
+            <p class="sdg-card-desc" data-i18n="sdg16Desc">
+              Strengthens institutional trust by connecting citizens directly with authentic government portals.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Multi-Step Scanning Progress Modal (Simulates Slide 7 Pipeline) -->
+  <div id="scannerProgressModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalScanTitle">
+    <div class="modal-content">
+      <h3 id="modalScanTitle" class="modal-title" style="font-size: 1.25rem;" data-i18n="scanningTitle">
+        AI Analysis in Progress...
+      </h3>
+
+      <div class="scanner-steps-list">
+        <div id="scanStep1" class="scan-step">
+          <span class="scan-step-indicator">✓</span>
+          <span data-i18n="step1">1. Ingesting & Tokenizing Text Content...</span>
+        </div>
+        <div id="scanStep2" class="scan-step">
+          <span class="scan-step-indicator">✓</span>
+          <span data-i18n="step2">2. NLP Entity & Claim Extraction...</span>
+        </div>
+        <div id="scanStep3" class="scan-step">
+          <span class="scan-step-indicator">✓</span>
+          <span data-i18n="step3">3. Detecting Scam Indicators & Risk Heuristics...</span>
+        </div>
+        <div id="scanStep4" class="scan-step">
+          <span class="scan-step-indicator">✓</span>
+          <span data-i18n="step4">4. Cross-referencing Official Government Knowledge Base...</span>
+        </div>
+        <div id="scanStep5" class="scan-step">
+          <span class="scan-step-indicator">✓</span>
+          <span data-i18n="step5">5. Synthesizing Explainable Verdict & Guidance...</span>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div id="progressBarFill" class="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cyber Crime Report Incident Modal -->
+  <div id="cyberReportModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalReportTitle">
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 id="modalReportTitle" class="modal-title" style="color: #fca5a5;" data-i18n="cyberModalTitle">
+          🚨 National Cyber Crime Portal Incident Draft
+        </h3>
+        <button type="button" class="modal-close-btn" id="btnCloseCyberModal" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px;">
+        Use this pre-filled incident template to report this fraudulent scheme to the <strong>National Cyber Crime Reporting Portal</strong> (Helpline 1930 / <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer">cybercrime.gov.in</a>):
+      </p>
+
+      <textarea id="cyberReportText" class="textarea-control" style="min-height: 220px; font-family: monospace; font-size: 0.85rem;" readonly></textarea>
+
+      <div class="form-action-row" style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCopyCyberReport" data-i18n="btnCopyCyberReport">
+          📋 Copy Incident Report
+        </button>
+        <a href="tel:1930" class="btn btn-primary btn-sm" data-i18n="btnDial1930">
+          📞 Dial 1930 Helpline
+        </a>
+        <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-danger btn-sm" data-i18n="btnOpenCybercrime">
+          Open cybercrime.gov.in ↗
+        </a>
+      </div>
+
+      <!-- Direct Submission to Platform MySQL Database -->
+      <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); border-radius: 8px; padding: 14px; margin-top: 14px;">
+        <h4 style="color: #38bdf8; font-size: 0.95rem; margin-bottom: 6px;" data-i18n="dbFilingHeader">💾 File Complaint Directly to Platform Database:</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+          <input type="text" id="reportCitizenName" class="auth-form-input" placeholder="Your Name (e.g. Ramesh Kumar)" style="padding: 7px 10px; font-size: 0.85rem;" data-i18n-placeholder="reportCitizenNamePlaceholder">
+          <input type="text" id="reportCitizenContact" class="auth-form-input" placeholder="Phone or Email (for tracking)" style="padding: 7px 10px; font-size: 0.85rem;" data-i18n-placeholder="reportCitizenContactPlaceholder">
+        </div>
+        <div class="form-action-row" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" class="btn btn-primary btn-sm" id="btnSubmitDbReport" data-i18n="btnSubmitDbReport">
+            💾 Log Incident to Database & Generate Ack No.
+          </button>
+        </div>
+        <div id="dbReportAckBox" class="hidden" style="margin-top: 10px; padding: 10px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 6px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shareable Fact-Check Graphic Alert Card Modal -->
+  <div id="shareCardModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalShareCardTitle">
+    <div class="modal-content" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 id="modalShareCardTitle" class="modal-title" style="color: #f59e0b; display: flex; align-items: center; gap: 8px;">
+          🖼️ Shareable Citizen "Fake Alert" Graphic Card
+        </h3>
+        <button type="button" class="modal-close-btn" id="btnCloseShareCardModal" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;" data-i18n="shareModalSubtitle">
+        Generate and forward this verified alert image directly to WhatsApp groups and family chats to stop the viral spread of this scam.
+      </p>
+
+      <!-- Canvas Alert Graphic Preview -->
+      <div class="share-card-canvas-container" style="background: #0b141a; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+        <canvas id="shareAlertCanvas" width="1200" height="630" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);"></canvas>
+      </div>
+
+      <div class="form-action-row" style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end;">
+        <button type="button" class="btn btn-primary btn-sm" id="btnDownloadAlertImage" data-i18n="btnDownloadAlertImage">
+          📥 Download Image (PNG)
+        </button>
+        <button type="button" class="btn btn-whatsapp-direct btn-sm" id="btnWhatsAppShareModal" data-i18n="btnWhatsAppShareModal">
+          📱 Forward to WhatsApp
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" id="btnCopyAlertText" data-i18n="btnCopyAlertText">
+          📋 Copy Text Advisory
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Groq API Key Config Modal -->
+  <div id="groqKeyModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalGroqTitle">
+    <div class="modal-content" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3 id="modalGroqTitle" class="modal-title" style="color: #38bdf8; display: flex; align-items: center; gap: 8px;" data-i18n="groqModalTitle">
+          ⚡ Groq LPU Cloud AI Settings
+        </h3>
+        <button type="button" class="modal-close-btn" id="btnCloseGroqModal" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
+        InfoShield connects directly to <strong>Groq's Ultra-Fast LPU Cloud</strong> running <code>qwen/qwen3.8-27b</code> for instant deep reasoning, zero-shot entity extraction, and scam analysis.
+      </p>
+
+      <div style="margin-bottom: 14px;">
+        <label for="groqApiKeyInput" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main);" data-i18n="groqApiKeyLabel">
+          Groq API Key (Stored securely in browser localStorage):
+        </label>
+        <input 
+          type="password" 
+          id="groqApiKeyInput" 
+          class="url-input-field" 
+          placeholder="gsk_..." 
+          style="width: 100%; font-family: monospace; font-size: 0.88rem;">
+      </div>
+
+      <div style="font-size: 0.82rem; color: #10b981; margin-bottom: 16px; display: flex; align-items: center; gap: 6px;" id="groqKeyStatusMsg">
+        <span>✅</span> <span>Key active • Model: <strong>qwen/qwen3.8-27b</strong> on Groq LPU</span>
+      </div>
+
+      <div class="form-action-row" style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button type="button" class="btn btn-secondary btn-sm" id="btnResetGroqKey" data-i18n="btnResetGroqKey">Reset Default Key</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btnSaveGroqKey" data-i18n="btnSaveGroqKey">Save & Connect</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citizen Authentication & Incident History Modal -->
+  <div id="citizenAuthModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalAuthTitle">
+    <div class="modal-content auth-modal-card" style="max-width: 520px;">
+      <div class="modal-header auth-modal-header">
+        <div class="auth-modal-title-box">
+          <span class="auth-modal-badge" data-i18n="authModalBadge">🇮🇳 National Cyber Defense</span>
+          <h3 id="modalAuthTitle" class="modal-title auth-modal-title">
+            <span>🛡️</span> Citizen Security Portal
+          </h3>
+          <p class="auth-modal-subtitle" data-i18n="authModalSubtitle">Access your verified incident filings & AI fraud defense record</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btnCloseAuthModal" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <!-- State 1: Guest View (Login / Register Tabs) -->
+      <div id="authGuestView">
+        <!-- 1-Click Quick Demo Login Banner for Evaluators -->
+        <div class="auth-demo-shortcut-banner">
+          <div class="demo-shortcut-text">
+            <strong data-i18n="demoShortcutTitle">⚡ Instant Evaluator Access</strong>
+            <span data-i18n="demoShortcutDesc">Test the full Citizen Portal without typing credentials</span>
+          </div>
+          <button type="button" class="btn-demo-quickfill" id="btnDemoLogin" data-i18n="btnDemoLogin">
+            1-Click Demo Login ➔
+          </button>
+        </div>
+
+        <div class="auth-tabs-nav">
+          <button type="button" class="auth-tab-btn active" id="tabAuthLogin">
+            <span>🔑</span> Sign In
+          </button>
+          <button type="button" class="auth-tab-btn" id="tabAuthRegister">
+            <span>📝</span> Create Account
+          </button>
+        </div>
+
+        <div id="authStatusAlert" class="auth-status-msg hidden"></div>
+
+        <!-- Login Form -->
+        <form id="formLogin" class="auth-form-body" onsubmit="return false;">
+          <div class="auth-form-group">
+            <label class="auth-form-label" for="loginEmail" data-i18n="labelEmail">Email Address:</label>
+            <div class="auth-input-wrapper">
+              <span class="auth-field-icon">✉️</span>
+              <input type="email" id="loginEmail" class="auth-form-input has-icon" placeholder="citizen@example.com" required autocomplete="email">
+            </div>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-form-label" for="loginPassword" data-i18n="labelPassword">Password:</label>
+            <div class="auth-input-wrapper">
+              <span class="auth-field-icon">🔒</span>
+              <input type="password" id="loginPassword" class="auth-form-input has-icon has-toggle" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="btn-toggle-password" id="btnToggleLoginPass" title="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+          <div class="auth-form-options">
+            <label class="auth-remember-check">
+              <input type="checkbox" id="loginRememberMe" checked>
+              <span data-i18n="labelRemember">Remember this device</span>
+            </label>
+            <span class="auth-secure-notice" data-i18n="securityNotice">🛡️ 256-bit Scrypt Protected</span>
+          </div>
+          <button type="button" class="btn btn-primary w-full btn-auth-submit" id="btnSubmitLogin">
+            <span>⚡</span> Sign In to Citizen Portal
+          </button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="formRegister" class="auth-form-body hidden" onsubmit="return false;">
+          <div class="auth-form-group">
+            <label class="auth-form-label" for="regName" data-i18n="labelFullName">Full Name:</label>
+            <div class="auth-input-wrapper">
+              <span class="auth-field-icon">👤</span>
+              <input type="text" id="regName" class="auth-form-input has-icon" placeholder="e.g. Aakansha Sharma" required>
+            </div>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-form-label" for="regEmail" data-i18n="labelEmail">Email Address:</label>
+            <div class="auth-input-wrapper">
+              <span class="auth-field-icon">✉️</span>
+              <input type="email" id="regEmail" class="auth-form-input has-icon" placeholder="citizen@example.com" required autocomplete="email">
+            </div>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-form-label" for="regState" data-i18n="labelState">State / Union Territory:</label>
+            <div class="auth-input-wrapper">
+              <span class="auth-field-icon">📍</span>
+              <select id="regState" class="auth-form-input has-icon" style="cursor: pointer;">
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Delhi NCT">Delhi NCT</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Bihar">Bihar</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Other">Other State / UT</option>
+              </select>
+            </div>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-form-label" for="regPassword">Password (Min 8 characters):</label>
+            <div class="auth-input-wrapper">
+              <span class="auth-field-icon">🔒</span>
+              <input type="password" id="regPassword" class="auth-form-input has-icon has-toggle" placeholder="Create a strong password" required autocomplete="new-password">
+              <button type="button" class="btn-toggle-password" id="btnToggleRegPass" title="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary w-full btn-auth-submit" id="btnSubmitRegister">
+            <span>🛡️</span> Create Citizen Account & Sign In
+          </button>
+        </form>
+      </div>
+
+      <!-- State 2: Authenticated User Profile & Complaints -->
+      <div id="authUserView" class="hidden">
+        <!-- Citizen Profile Header Card -->
+        <div class="auth-profile-card">
+          <div class="auth-profile-avatar-box">
+            <span class="auth-profile-avatar-text" id="userProfileAvatar">AS</span>
+            <span class="auth-online-status-dot" title="Authenticated"></span>
+          </div>
+          <div class="auth-profile-details">
+            <div class="auth-profile-name-row">
+              <strong id="userProfileName" class="auth-profile-name">Aakansha Sharma</strong>
+              <span id="userProfileRole" class="badge-blue" style="font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; font-weight: 700; text-transform: uppercase;" data-i18n="userRoleBadge">Citizen</span>
+            </div>
+            <span id="userProfileEmail" class="auth-profile-email">citizen@example.com</span>
+            <div class="auth-profile-verified-tag">
+              <span>✅</span> <span data-i18n="userVerifiedTag">Verified Citizen • National 1930 Cyber Protocol</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Citizen Security Activity Row -->
+        <div class="auth-activity-row">
+          <div class="auth-activity-item">
+            <span class="auth-act-label" data-i18n="profileDefenseStatus">Defense Status</span>
+            <strong class="auth-act-val" style="color: #34d399;" data-i18n="profileProtected">🛡️ Protected</strong>
+          </div>
+          <div class="auth-activity-item">
+            <span class="auth-act-label" data-i18n="profileScansVerified">Scans Verified</span>
+            <strong class="auth-act-val" style="color: #38bdf8;">24+ Verified</strong>
+          </div>
+          <div class="auth-activity-item">
+            <span class="auth-act-label" data-i18n="profileComplaints">Complaints</span>
+            <strong class="auth-act-val" id="authComplaintCount" style="color: #fbbf24;">Active</strong>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h4 style="color: #fed7aa; font-size: 0.92rem; margin: 0;" data-i18n="myReportsTitle">📋 My Filed Scam Reports (Cybercrime 1930):</h4>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Encrypted Database</span>
+          </div>
+          <div id="userComplaintsList" class="complaints-scroll-box">
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Loading your filed incident reports...</p>
+          </div>
+        </div>
+
+        <div class="form-action-row" style="display: flex; justify-content: space-between; margin-top: 18px;">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnRefreshUserReports" data-i18n="btnRefreshReports">🔄 Refresh Reports</button>
+          <button type="button" class="btn btn-danger btn-sm" id="btnAuthLogout" data-i18n="btnSignOut">🚪 Sign Out</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Academic Project Info Modal (Slide 1 Details) -->
+  <div id="projectInfoModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalProjTitle">
+    <div class="modal-content" style="max-width: 620px;">
+      <div class="modal-header">
+        <h3 id="modalProjTitle" class="modal-title" data-i18n="projectModalTitle">InfoShield Project Details</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseProjectModal" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <div style="font-size: 0.92rem; color: var(--text-main); line-height: 1.7;">
+        <div style="background: rgba(14, 165, 233, 0.1); border-left: 4px solid var(--color-primary); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 16px;">
+          <strong>Mini Project Id:</strong> 2026-27CSEMPID003<br>
+          <strong>Department:</strong> Department of Computer Science & Engineering<br>
+          <strong>Institution:</strong> ABES Institute of Technology (ABESIT), Ghaziabad<br>
+          <strong>Affiliated to:</strong> Dr. A.P.J. Abdul Kalam Technical University (AKTU)<br>
+          <strong>Academic Session:</strong> 2026-27
+        </div>
+
+        <h4 style="color: #fff; margin-bottom: 8px;" data-i18n="projectPresentedBy">Presented By:</h4>
+        <ul style="padding-left: 20px; margin-bottom: 16px; color: var(--text-muted);">
+          <li><strong>Aakansha Sharma</strong> (Roll No: 2502900100003)</li>
+          <li><strong>Aadrika</strong> (Roll No: 2502900100002)</li>
+          <li><strong>Aditi Rai</strong> (Roll No: 2502900100017)</li>
+        </ul>
+
+        <h4 style="color: #fff; margin-bottom: 6px;" data-i18n="projectKeyInnovation">Key Innovation (Slide 5 & 7):</h4>
+        <p style="color: var(--text-muted); font-size: 0.88rem;" data-i18n="projectInnovationDesc">
+          Detect ➔ Verify ➔ Explain ➔ Guide: A citizen-friendly AI workflow bridging evidence verification with verified official Indian public welfare databases across regional Indian languages.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p data-i18n="footerText">
+        InfoShield • National Citizen Safety Initiative • Empowering Indian Citizens against Digital Misinformation.
+      </p>
+      <p class="footer-team" data-i18n="footerTeam">
+        🇮🇳 Digital India • Verified Government Welfare & Cyber Crime Defense Portal
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data/schemes.js"></script>
+  <script src="js/data/scam_database.js"></script>
+  <script src="js/data/translations.js"></script>
+  <script src="js/data/translations_dravidian.js"></script>
+  <script src="js/data/translations_ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/analyzer.js"></script>
+  <script src="js/groq.js"></script>
+  <script src="js/ocr.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

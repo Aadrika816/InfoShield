@@ -1,0 +1,879 @@
+/* ==========================================================================
+   InfoShield - Professional Verification Insights & Palindrome Graph
+   Supports Dark & Light mode seamlessly via CSS tokens.
+   ========================================================================== */
+
+:root {
+  --chart-risk: #ef4444;
+  --chart-warn: #f59e0b;
+  --chart-safe: #10b981;
+  --chart-track: rgba(148, 163, 184, 0.18);
+  --card-bg: var(--bg-surface);
+  --card-border: var(--border-subtle);
+  --text-primary: var(--text-main);
+  --text-secondary: var(--text-muted);
+}
+
+[data-theme="light"] {
+  --chart-track: rgba(100, 116, 139, 0.16);
+  --card-bg: #ffffff;
+  --card-border: rgba(15, 23, 42, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+}
+
+/* Smooth transition when switching themes */
+body, .site-header, .insight-card, .verdict-card, .pillar-card, .theme-switch, .palindrome-card, .official-gateway-card {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ==========================================================================
+   Theme Switcher Control (2 Clear Options: Light / Dark)
+   ========================================================================== */
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  gap: 2px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .theme-switch {
+  background: #f1f5f9;
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+.theme-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-opt:hover {
+  color: var(--text-main);
+}
+
+.theme-opt.is-active {
+  background: linear-gradient(135deg, #FF9933 0%, #f97316 100%);
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.45);
+}
+
+.theme-opt:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Palindrome Graph (Symmetric Equilibrium Spectrum)
+   ========================================================================== */
+.palindrome-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.palindrome-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981 0%, #0ea5e9 50%, #ef4444 100%);
+}
+
+.palindrome-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.palindrome-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.palindrome-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.palindrome-title {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.palindrome-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.palindrome-equilibrium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.palindrome-equilibrium-badge.is-genuine {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.palindrome-equilibrium-badge.is-scam {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.palindrome-equilibrium-badge.is-caution {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* Palindrome Wings Header */
+.palindrome-wings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.wing-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wing-genuine {
+  color: #10b981;
+}
+
+.wing-scam {
+  color: #ef4444;
+}
+
+.wing-axis-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.wing-score-val {
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .wing-score-val {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+/* Symmetric Spectrum Track */
+.palindrome-track-wrapper {
+  margin: 16px 0 24px;
+}
+
+.palindrome-track {
+  position: relative;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--chart-track);
+  overflow: visible;
+  display: flex;
+}
+
+.palindrome-half {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.palindrome-half.half-genuine {
+  border-radius: var(--radius-full) 0 0 var(--radius-full);
+}
+
+.palindrome-half.half-scam {
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+}
+
+.palindrome-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fill-genuine {
+  float: right;
+  background: linear-gradient(270deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.fill-scam {
+  float: left;
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+.palindrome-center-axis {
+  width: 3px;
+  height: 32px;
+  margin-top: -5px;
+  background: #0ea5e9;
+  z-index: 3;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.6);
+}
+
+/* Dynamic Pointer Needle */
+.palindrome-pointer {
+  position: absolute;
+  top: -10px;
+  transform: translateX(-50%);
+  z-index: 5;
+  transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.pointer-bubble {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+
+.pointer-needle {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #0f172a;
+}
+
+[data-theme="light"] .pointer-bubble {
+  background: #0f172a;
+  color: #fff;
+}
+
+/* Symmetric Ticks */
+.palindrome-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.text-green { color: #10b981; }
+.text-red { color: #ef4444; }
+.text-center { color: var(--text-secondary); font-weight: 800; }
+
+/* Symmetrical Evidence Breakdown Columns */
+.palindrome-evidence-columns {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .palindrome-evidence-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.palindrome-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.palindrome-col-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.col-left .palindrome-col-title { color: #10b981; }
+.col-right .palindrome-col-title { color: #ef4444; }
+
+.evidence-pill-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.evidence-pill-item.is-trust {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+.evidence-pill-item.is-threat {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.palindrome-summary-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  height: 100%;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.5;
+  border-left: 4px solid var(--chart-safe);
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--text-primary);
+}
+
+.palindrome-summary-box.is-scam {
+  border-left-color: var(--chart-risk);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.palindrome-summary-box.is-caution {
+  border-left-color: var(--chart-warn);
+  background: rgba(245, 158, 11, 0.12);
+}
+
+/* ==========================================================================
+   Official Government Verification Gateway Card
+   ========================================================================== */
+.official-gateway-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.ovg-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ovg-emblem {
+  font-size: 2.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ovg-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.ovg-badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(16, 185, 129, 0.16);
+  color: #10b981;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.ovg-badge-security {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(14, 165, 233, 0.14);
+  color: #0ea5e9;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.ovg-title {
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.ovg-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Primary Verified Box */
+.ovg-primary-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.ovg-link-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ovg-link-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.ovg-link-url {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0ea5e9;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.ovg-link-url:hover {
+  text-decoration: underline;
+}
+
+.ovg-action-btn {
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Secondary Links Grid */
+.ovg-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.ovg-quick-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background: var(--bg-surface-elevated);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .ovg-quick-link {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+.ovg-quick-link:hover {
+  transform: translateY(-2px);
+  border-color: #0ea5e9;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.18);
+  color: var(--text-primary);
+}
+
+.oql-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.oql-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.oql-text strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.oql-text span {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.oql-arrow {
+  font-weight: 800;
+  color: #0ea5e9;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   High-Impact Verified Result Banner (True or False)
+   ========================================================================== */
+.truth-verdict-banner {
+  margin: 18px 0 16px;
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
+  border: 2px solid rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.09);
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .truth-verdict-banner {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.truth-verdict-banner.is-false {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(220, 38, 38, 0.05) 100%);
+}
+
+.truth-verdict-banner.is-true {
+  border-color: rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.05) 100%);
+}
+
+[data-theme="light"] .truth-verdict-banner.is-true {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.truth-verdict-banner.is-caution {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.05) 100%);
+}
+
+[data-theme="light"] .truth-verdict-banner.is-caution {
+  background: #fffbeb;
+  border-color: #fcd34d;
+}
+
+.truth-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.truth-kicker {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.truth-stamp-badge {
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.4px;
+}
+
+.is-false .truth-stamp-badge {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.is-true .truth-stamp-badge {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.is-caution .truth-stamp-badge {
+  background: #f59e0b;
+  color: #0f172a;
+}
+
+.truth-question-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 6px;
+}
+
+.truth-question {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.truth-answer-highlight {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.truth-sub-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Visual Comparison Metrics Grid (Quick Glance Bar Charts)
+   ========================================================================== */
+.visual-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0 20px;
+}
+
+@media (max-width: 768px) {
+  .visual-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metric-card {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background: var(--bg-surface-elevated);
+}
+
+[data-theme="light"] .metric-card {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+.metric-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+}
+
+.metric-label {
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.metric-val {
+  font-weight: 800;
+}
+
+.metric-bar-track {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--chart-track);
+  overflow: hidden;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fill-scam-bar {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+}
+
+.fill-trust-bar {
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+.fill-official-bar {
+  background: linear-gradient(90deg, #0ea5e9 0%, #0284c7 100%);
+}
+
+/* ==========================================================================
+   Citizen Safety Guide: Prevention & What You Should Do
+   ========================================================================== */
+.prevention-action-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin: 22px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.prevention-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.prevention-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.prevention-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.prevention-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.prevention-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .prevention-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.prevention-card {
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+}
+
+.do-not-card {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+[data-theme="light"] .do-not-card {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.do-card {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="light"] .do-card {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.prevention-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.p-card-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.prevention-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prevention-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.plist-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
