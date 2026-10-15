@@ -1,0 +1,4 @@
+backend/tests
+backend/.env
+tools
+create_mock_screenshots.py

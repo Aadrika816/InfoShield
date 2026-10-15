@@ -6,10 +6,13 @@
 
 class InfoShieldAPI {
   constructor(baseUrl = "") {
-    // If running on Flask (port 5000), use relative "/api". Otherwise use explicit "http://localhost:5000/api".
+    // Use relative "/api" when served by Flask (locally on port 5000 or deployed, e.g. Vercel).
+    // Only a standalone local static server or file:// needs the explicit "http://localhost:5000/api".
     if (!baseUrl) {
-      const isSameOriginFlask = window.location.port === "5000";
-      this.baseUrl = isSameOriginFlask ? "/api" : "http://localhost:5000/api";
+      const { protocol, hostname, port } = window.location;
+      const isLocalHost = hostname === "localhost" || hostname === "127.0.0.1";
+      const isStandaloneFrontend = protocol === "file:" || (isLocalHost && port !== "5000");
+      this.baseUrl = isStandaloneFrontend ? "http://localhost:5000/api" : "/api";
     } else {
       this.baseUrl = baseUrl.replace(/\/+$/, "");
     }
