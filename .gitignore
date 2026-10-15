@@ -13,3 +13,5 @@ Thumbs.db
 
 *.db
 scratch_*.txt
+.vercel
+.env*
